@@ -1,6 +1,6 @@
 import { h, jsx } from "../deps.ts";
 
-import { data } from "../api/repo.ts"
+import { data } from "../api/repo.ts";
 
 export const style = css`
 :root {
@@ -85,27 +85,26 @@ padding: 5px;
 }
 `;
 
-
 type Data = {
-    name: string,
-    archived: boolean,
-    stargazers_count: number,
-    html_url: string,
-    description: string
-  }[]
+  name: string;
+  archived: boolean;
+  stargazers_count: number;
+  html_url: string;
+  description: string;
+}[];
 
-const repoList = (data:Data) => {
-    return data.map((repo) => {
-        return (
-          <li>
-            <a href={repo.html_url }>{repo.name}</a>
-            <br/>⭐ star: {repo.stargazers_count} {repo.archived? "📦 archived" : ""}
-            <p>{repo.description}</p>
-          </li>
-        );
-      });
-  }
-
+const repoList = (data: Data) => {
+  return data.map((repo) => {
+    return (
+      <li>
+        <a href={repo.html_url}>{repo.name}</a>
+        <br />⭐ star: {repo.stargazers_count}{" "}
+        {repo.archived ? "📦 archived" : ""}
+        <p>{repo.description}</p>
+      </li>
+    );
+  });
+};
 
 export const App = () => (
   <html lang="en">
@@ -122,7 +121,12 @@ export const App = () => (
         {repoList(data)}
       </div>
       <div class="links">
-        <a href="https://github.com/geeknees/hacktoberfest-deno" class="contact-link">GitHub</a>
+        <a
+          href="https://github.com/geeknees/hacktoberfest-deno"
+          class="contact-link"
+        >
+          GitHub
+        </a>
       </div>
     </body>
   </html>
@@ -136,5 +140,5 @@ export const NotFound = () => (
 
 /** Wrapper function to get syntax highlight for CSS in editors. */
 function css(style: TemplateStringsArray) {
-    return style.join("");
-  }
+  return style.join("");
+}

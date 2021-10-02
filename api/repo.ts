@@ -1,4 +1,4 @@
-import ky from 'https://cdn.skypack.dev/ky?dts';
+import ky from "https://cdn.skypack.dev/ky?dts";
 
 const baseUrl = "https://api.github.com";
 const keyword = "topic:hacktoberfest+topic:deno";
@@ -9,7 +9,9 @@ type Response = {
   items: [];
 };
 
-const repos = await ky.get(`${baseUrl}/search/repositories?q=${keyword}`).json<Response>();
+const repos = await ky.get(`${baseUrl}/search/repositories?q=${keyword}`).json<
+  Response
+>();
 
 export const data = repos.items.map(({
   name,
