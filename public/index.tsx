@@ -1,9 +1,11 @@
 import { h, jsx } from "../deps.ts";
 
-import { data } from "../api/repo.ts";
+import { RepoData } from "../api/type.ts";
+import { topRepo } from "../api/repo.ts";
 
 export const style = css`
 :root {
+  --default-color: transparent;
   --primary-color: #6c63ff;
   --secondary-color: #f5f2fe;
   --link-border-radius: 5px;
@@ -44,12 +46,25 @@ a {
 .contact-link {
   border-radius: var(--link-border-radius);
   margin: 20px;
-  padding: 20px;
+  padding: 10px 20px;
+  border: 1px solid #000000;
 }
 
 a.contact-link {
   background-color: #000000;
   color: var(--secondary-color);
+}
+
+.repo-link {
+  border-radius: var(--link-border-radius);
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #000000;
+}
+
+a.repo-link {
+  background-color: var(--default-color);
+  color: #000000;
 }
 
 #repo {
@@ -78,15 +93,7 @@ a.contact-link {
 }
 `;
 
-type Data = {
-  name: string;
-  archived: boolean;
-  stargazers_count: number;
-  html_url: string;
-  description: string;
-}[];
-
-const repoList = (data: Data) => {
+const repoList = (data: RepoData) => {
   return data.map((repo) => {
     return (
       <li>
@@ -99,7 +106,36 @@ const repoList = (data: Data) => {
   });
 };
 
-export const App = () => (
+const repoButton = () => (
+  <div class="links">
+    <a
+      href="/repos/page/1"
+      class="repo-link"
+    >
+      🆕 Find more repositories
+    </a>
+  </div>
+);
+
+const nextButton = (page: number) => (
+  <div class="links">
+    <a
+      href={`/repos/page/${page - 1}`}
+      class="repo-link"
+    >
+      ◀️ Prev
+    </a>
+
+    <a
+      href={`/repos/page/${page + 1}`}
+      class="repo-link"
+    >
+      ▶️ Next
+    </a>
+  </div>
+);
+
+export const App = ({ items, page }: any) => (
   <html lang="en">
     <head>
       <meta charSet="UTF-8" />
@@ -111,8 +147,9 @@ export const App = () => (
     <body>
       <h2>👋 Hacktoberfest for deno developers</h2>
       <div id="repo">
-        {repoList(data)}
+        {repoList(items ? JSON.parse(items) : topRepo)}
       </div>
+      {page ? nextButton(page) : repoButton()}
       <div class="links">
         <a
           href="https://github.com/geeknees/hacktoberfest-deno"
