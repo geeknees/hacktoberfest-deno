@@ -97,7 +97,7 @@ const repoList = (data: RepoData) => {
   return data.map((repo) => {
     return (
       <li>
-        <a href={repo.html_url}>{repo.name}</a>
+        <a href={repo.html_url}>{repo.full_name}</a>
         <br />⭐ star: {repo.stargazers_count}{" "}
         {repo.archived ? "📦 archived" : ""}
         <p>{repo.description}</p>

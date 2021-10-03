@@ -15,13 +15,13 @@ const endpoint = (page: number) => {
 export const fetchRepo = async (page: number) => {
   const newRepos = await ky.get(endpoint(page)).json<Response>();
   return newRepos.items.map(({
-    name,
+    full_name,
     archived,
     stargazers_count,
     html_url,
     description,
   }) => ({
-    name,
+    full_name,
     archived,
     stargazers_count,
     html_url,
@@ -31,13 +31,13 @@ export const fetchRepo = async (page: number) => {
 
 const repos = await ky.get(endpoint(page)).json<Response>();
 export const topRepo = repos.items.map(({
-  name,
+  full_name,
   archived,
   stargazers_count,
   html_url,
   description,
 }) => ({
-  name,
+  full_name,
   archived,
   stargazers_count,
   html_url,
