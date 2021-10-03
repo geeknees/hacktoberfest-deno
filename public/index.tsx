@@ -1,62 +1,70 @@
 import { h, jsx } from "../deps.ts";
 
-import { data } from "../api/repo.ts";
+import { RepoData } from "../api/type.ts";
+import { topRepo } from "../api/repo.ts";
 
 export const style = css`
 :root {
---primary-color: #6c63ff;
---secondary-color: #f5f2fe;
---link-border-radius: 5px;
---box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+  --default-color: transparent;
+  --primary-color: #6c63ff;
+  --secondary-color: #f5f2fe;
+  --link-border-radius: 5px;
+  --box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
 }
 
 body {
-margin: 20px auto;
-text-align: center;
-max-width: 1200px;
+  margin: 20px auto;
+  text-align: center;
+  max-width: 1200px;
 }
 
 h1 {
-font-size: 96px;
-margin: 0;
+  font-size: 96px;
 }
+
 h2 {
-margin: 10px 0 0;
-font-size: 48px;
+  font-size: 48px;
 }
 
 h3 {
-margin: 0 0 20px;
-font-size: 24px;
+  font-size: 24px;
 }
+
 a {
-color: var(--primary-color);
+  color: var(--primary-color);
 }
 
 .links {
-display: flex;
-justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .links a {
-text-decoration: none;
+  text-decoration: none;
 }
 
 .contact-link {
-border-radius: var(--link-border-radius);
-margin: 20px;
-padding: 20px;
+  border-radius: var(--link-border-radius);
+  margin: 20px;
+  padding: 10px 20px;
+  border: 1px solid #000000;
 }
 
 a.contact-link {
-background-color: #000000;
-color: var(--secondary-color);
+  background-color: #000000;
+  color: var(--secondary-color);
 }
 
-.about-text {
-display: flex;
-justify-content: space-between;
-padding: 5px;
+.repo-link {
+  border-radius: var(--link-border-radius);
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #000000;
+}
+
+a.repo-link {
+  background-color: var(--default-color);
+  color: #000000;
 }
 
 #repo {
@@ -66,17 +74,17 @@ padding: 5px;
   justify-content: space-between;
   max-width: 1200px;
 }
-   
+
 #repo li {
   text-align: center;
   background-color: var(--primary-color);
   color: var(--secondary-color);
-  border-radius: var(--link-border-radius);  
+  border-radius: var(--link-border-radius);
   flex: 0 1 calc(25% - 1em);
   padding: 20px;
   margin: 10px;
 }
-   
+
 #repo li a {
   text-decoration: none;
   color: var(--secondary-color);
@@ -85,15 +93,7 @@ padding: 5px;
 }
 `;
 
-type Data = {
-  name: string;
-  archived: boolean;
-  stargazers_count: number;
-  html_url: string;
-  description: string;
-}[];
-
-const repoList = (data: Data) => {
+const repoList = (data: RepoData) => {
   return data.map((repo) => {
     return (
       <li>
@@ -106,7 +106,36 @@ const repoList = (data: Data) => {
   });
 };
 
-export const App = () => (
+const repoButton = () => (
+  <div class="links">
+    <a
+      href="/repos/page/1"
+      class="repo-link"
+    >
+      🆕 Find more repositories
+    </a>
+  </div>
+);
+
+const nextButton = (page: number) => (
+  <div class="links">
+    <a
+      href={`/repos/page/${page - 1}`}
+      class="repo-link"
+    >
+      ◀️ Prev
+    </a>
+
+    <a
+      href={`/repos/page/${page + 1}`}
+      class="repo-link"
+    >
+      ▶️ Next
+    </a>
+  </div>
+);
+
+export const App = ({ items, page }: any) => (
   <html lang="en">
     <head>
       <meta charSet="UTF-8" />
@@ -118,8 +147,9 @@ export const App = () => (
     <body>
       <h2>👋 Hacktoberfest for deno developers</h2>
       <div id="repo">
-        {repoList(data)}
+        {repoList(items ? JSON.parse(items) : topRepo)}
       </div>
+      {page ? nextButton(page) : repoButton()}
       <div class="links">
         <a
           href="https://github.com/geeknees/hacktoberfest-deno"
