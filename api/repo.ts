@@ -27,4 +27,4 @@ export const data = repos.items.map(({
   description,
 }));
 
-//console.table(data);
+console.log(data);

@@ -4,59 +4,52 @@ import { data } from "../api/repo.ts";
 
 export const style = css`
 :root {
---primary-color: #6c63ff;
---secondary-color: #f5f2fe;
---link-border-radius: 5px;
---box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+  --primary-color: #6c63ff;
+  --secondary-color: #f5f2fe;
+  --link-border-radius: 5px;
+  --box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
 }
 
 body {
-margin: 20px auto;
-text-align: center;
-max-width: 1200px;
+  margin: 20px auto;
+  text-align: center;
+  max-width: 1200px;
 }
 
 h1 {
-font-size: 96px;
-margin: 0;
+  font-size: 96px;
 }
+
 h2 {
-margin: 10px 0 0;
-font-size: 48px;
+  font-size: 48px;
 }
 
 h3 {
-margin: 0 0 20px;
-font-size: 24px;
+  font-size: 24px;
 }
+
 a {
-color: var(--primary-color);
+  color: var(--primary-color);
 }
 
 .links {
-display: flex;
-justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .links a {
-text-decoration: none;
+  text-decoration: none;
 }
 
 .contact-link {
-border-radius: var(--link-border-radius);
-margin: 20px;
-padding: 20px;
+  border-radius: var(--link-border-radius);
+  margin: 20px;
+  padding: 20px;
 }
 
 a.contact-link {
-background-color: #000000;
-color: var(--secondary-color);
-}
-
-.about-text {
-display: flex;
-justify-content: space-between;
-padding: 5px;
+  background-color: #000000;
+  color: var(--secondary-color);
 }
 
 #repo {
@@ -66,17 +59,17 @@ padding: 5px;
   justify-content: space-between;
   max-width: 1200px;
 }
-   
+
 #repo li {
   text-align: center;
   background-color: var(--primary-color);
   color: var(--secondary-color);
-  border-radius: var(--link-border-radius);  
+  border-radius: var(--link-border-radius);
   flex: 0 1 calc(25% - 1em);
   padding: 20px;
   margin: 10px;
 }
-   
+
 #repo li a {
   text-decoration: none;
   color: var(--secondary-color);
