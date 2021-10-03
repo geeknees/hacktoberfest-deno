@@ -5,7 +5,7 @@ export type Response = {
 };
 
 export type RepoData = {
-  name: string;
+  full_name: string;
   archived: boolean;
   stargazers_count: number;
   html_url: string;
