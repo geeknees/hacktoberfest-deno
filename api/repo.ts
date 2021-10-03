@@ -8,7 +8,8 @@ const page = 1;
 const per_page = 9;
 const sort = "";
 const order = "desc";
-const endpoint = (page: number) => {
+
+export const endpoint = (page: number) => {
   return `${baseUrl}/search/repositories?q=${keyword}&page=${page}&per_page=${per_page}&sort=${sort}&order=${order}`;
 };
 
@@ -44,4 +45,4 @@ export const topRepo = repos.items.map(({
   description,
 }));
 
-console.log(topRepo);
+//console.log(topRepo);
