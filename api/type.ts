@@ -1,3 +1,5 @@
+// deno-lint-ignore-file camelcase
+
 export type Response = {
   total_count: number;
   incomplete_results: boolean;

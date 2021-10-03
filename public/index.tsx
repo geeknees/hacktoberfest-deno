@@ -135,6 +135,7 @@ const nextButton = (page: number) => (
   </div>
 );
 
+// deno-lint-ignore no-explicit-any
 export const App = ({ items, page }: any) => (
   <html lang="en">
     <head>
